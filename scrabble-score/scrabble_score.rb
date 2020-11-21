@@ -1,9 +1,5 @@
-# frozen_string_literal: true
-
 # give score for a word on Scrabble game
 class Scrabble
-  attr_reader :letters
-
   TILES = Hash.new(0).update({
                                A: 1, N: 1,
                                B: 3, O: 1,
@@ -20,17 +16,17 @@ class Scrabble
                                M: 3, Z: 10
                              }).freeze
 
+  def self.score(tiles)
+    new(tiles).score
+  end
+
   def initialize(word)
     @letters = word.to_s.upcase.chars.map(&:to_sym)
   end
 
-  def score
-    letters.sum do |l|
-      TILES[l]
-    end
-  end
+  attr_reader :letters
 
-  def self.score(tiles)
-    new(tiles).score
+  def score
+    letters.sum(&TILES)
   end
 end
