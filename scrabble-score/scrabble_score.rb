@@ -14,7 +14,7 @@ class Scrabble
     K: 5, X: 8,
     L: 1, Y: 4,
     M: 3, Z: 10
-  }.freeze
+  }
 
   def self.score(tiles)
     new(tiles).score
@@ -26,9 +26,8 @@ class Scrabble
 
   def initialize(word, tiles = TILES)
     @letters = word.to_s.upcase.chars.map(&:to_sym)
-    t = tiles.dup
-    t.default = 0
-    @tiles = t.freeze
+    tiles.default = 0
+    @tiles = tiles
   end
 
   public
